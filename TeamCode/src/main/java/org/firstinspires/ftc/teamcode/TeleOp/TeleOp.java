@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
-
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp!!!uwu")
 public class TeleOp extends LinearOpMode {
   @Override
   public void runOpMode(){
@@ -50,7 +50,7 @@ public class TeleOp extends LinearOpMode {
 
 
     }
-    }
+  }
 }
 
 
