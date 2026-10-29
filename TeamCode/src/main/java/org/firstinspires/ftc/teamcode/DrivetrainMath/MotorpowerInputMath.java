@@ -14,7 +14,8 @@ public class MotorpowerInputMath {
      * @param currentrelativeheading the gyro scope's value based off of the initial heading which eventualy sholud be based off of the rotation of the robot from the limelight
      * @return output x, y, and turn motor power values
      */
-    public static double[] MotorPowerArray(double leftstickinputx, double leftstickinputy, double targetturn, double currentrelativeheading) {
+    public static double[] MotorPowerArray(double leftstickinputx, double leftstickinputy, double targetturn, float currentrelativeheading, boolean slowmode) {
+
         double targetdrivey = leftstickinputx * cos(currentrelativeheading) - leftstickinputy * sin(currentrelativeheading);
         double targetdrivex = leftstickinputx * sin(currentrelativeheading) + leftstickinputy * cos(currentrelativeheading);
 
@@ -22,8 +23,7 @@ public class MotorpowerInputMath {
         double BLmotorpower = targetdrivey - targetdrivex + targetturn;
         double FRmotorpower = (targetdrivey - targetdrivex) - targetturn;
         double FLmotorpower = targetdrivey + targetdrivex + targetturn;
-
+        if (slowmode) return new double[]{BRmotorpower / 4, BLmotorpower / 4, FRmotorpower / 4, FLmotorpower / 4};
         return new double[]{BRmotorpower, BLmotorpower, FRmotorpower, FLmotorpower};
-
     }
 }
