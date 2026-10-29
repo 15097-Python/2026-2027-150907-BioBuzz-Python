@@ -1,4 +1,4 @@
-//Crosby
+//Crosby//Crosby
 package org.firstinspires.ftc.teamcode.TeleOp;
 import static org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath.MotorPowerArray;
 import static org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.OctomomInitializations;
@@ -54,7 +54,7 @@ public class TeleOp extends LinearOpMode {
       double targetturn = gamepad1.right_stick_x;
       boolean slowmode = gamepad1.left_trigger_pressed;
       boolean fireinthehole = gamepad1.right_trigger_pressed;
-      double[] motorpowerarray = MotorPowerArray(leftstickinputy, -leftstickinputx, targetturn, robotHeadingR);
+      double[] motorpowerarray = MotorPowerArray(leftstickinputy, -leftstickinputx, targetturn, robotHeadingR, slowmode);
       double BRmotorpower = motorpowerarray[0];
       double BLmotorpower = motorpowerarray[1];
       double FRmotorpower = motorpowerarray[2];
