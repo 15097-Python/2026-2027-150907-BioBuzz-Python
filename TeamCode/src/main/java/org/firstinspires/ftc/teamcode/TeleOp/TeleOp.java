@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
 
 import org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.*;
 
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp!!!uwu")
 public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
@@ -67,7 +68,7 @@ public class TeleOp extends LinearOpMode {
 
 
     }
-    }
+  }
 }
 
 
