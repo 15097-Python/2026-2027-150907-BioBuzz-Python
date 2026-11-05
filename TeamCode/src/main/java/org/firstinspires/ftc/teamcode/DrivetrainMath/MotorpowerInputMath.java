@@ -26,6 +26,5 @@ public class MotorpowerInputMath {
         double FLmotorpower = targetdrivey - targetdrivex + targetturn;
 
         return new double[]{BRmotorpower, BLmotorpower, FRmotorpower, FLmotorpower};
-
     }
 }
