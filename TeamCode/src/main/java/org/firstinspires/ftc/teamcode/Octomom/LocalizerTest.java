@@ -30,21 +30,21 @@ import com.qualcomm.robotcore.util.MovingStatistics;
  * FTC Edition MK2. It is STRONGLY recommended to read the Quick Start guide for the
  * localizer feature, located here:
  */
-@TeleOp
+@TeleOp(name="localizetetst")
 public class LocalizerTest extends LinearOpMode
 {
     // #####################################################################################
     // YOU MUST ADJUST THESE CONSTANTS FOR YOUR ROBOT! SEE THE QUICKSTART GUIDE.
     // #####################################################################################
-    static final int DEADWHEEL_PORT_X = 1;
-    static final int DEADWHEEL_PORT_Y = 2;
+    static final int DEADWHEEL_PORT_X = 0;
+    static final int DEADWHEEL_PORT_Y = 1;
     static final OctoQuadFWv3.EncoderDirection DEADWHEEL_X_DIR = OctoQuadFWv3.EncoderDirection.FORWARD;
-    static final OctoQuadFWv3.EncoderDirection DEADWHEEL_Y_DIR = OctoQuadFWv3.EncoderDirection.REVERSE;
-    static final float X_TICKS_PER_MM = 12.66f;
-    static final float Y_TICKS_PER_MM = 12.66f;
-    static final float TCP_OFFSET_X_MM = -97.05f;
-    static final float TCP_OFFSET_Y_MM = -156.70f;
-    static final float IMU_SCALAR = 1.0323f;
+    static final OctoQuadFWv3.EncoderDirection DEADWHEEL_Y_DIR = OctoQuadFWv3.EncoderDirection.FORWARD;
+    static final float X_TICKS_PER_MM = 19.9656F;//19.9975//19.9656//20.1378
+    static final float Y_TICKS_PER_MM = 19.9586F;//20.0164//19.9586//19.8995F
+    static final float TCP_OFFSET_X_MM = 160F;
+    static final float TCP_OFFSET_Y_MM = -160F;
+    static final float IMU_SCALAR = 1.0086F;//1.0086////1.007//1.0087
 
     // Conversion factor for radians --> degrees
     static final double RAD2DEG = 180/Math.PI;
@@ -68,7 +68,7 @@ public class LocalizerTest extends LinearOpMode
         // Begin by retrieving a handle to the device from the hardware map. Take care
         // to specify 'OctoQuadFWv3' as specifying 'OctoQuad' will load the FTC SDK's
         // built-in driver which only supports firmware v2.
-        OctoQuadFWv3 oq = hardwareMap.get(OctoQuadFWv3.class, "octoquad");
+        OctoQuadFWv3 oq = hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
 
         // Crank up the telemetry update frequency to make the data display a bit less laggy
         telemetry.setMsTransmissionInterval(50);

@@ -1,5 +1,6 @@
 //Crosby//Jack
 package org.firstinspires.ftc.teamcode.TeleOp;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath.MotorPowerArray;
 import static org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.OctomomInitializations;
 
@@ -14,6 +15,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
 
+import org.firstinspires.ftc.teamcode.Octomom.OctoQuadFWv3;
 import org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.*;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp!!!uwu")
@@ -24,16 +26,16 @@ public class TeleOp extends LinearOpMode {
   @Override
   public void runOpMode(){
     //setting motors up
-    OctoQuad oq = OctomomInitializations();
-    OctoQuad.LocalizerDataBlock localizer;
-    localizer = new OctoQuad.LocalizerDataBlock();
+    OctoQuadFWv3 oq =  hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
+    OctoQuadFWv3.LocalizerDataBlock localizer;
+    localizer = new OctoQuadFWv3.LocalizerDataBlock();
     DcMotor BR = hardwareMap.get(DcMotor.class, "BR");
     DcMotor BL = hardwareMap.get(DcMotor.class, "BL");
     DcMotor FL = hardwareMap.get(DcMotor.class, "FL");
     DcMotor FR = hardwareMap.get(DcMotor.class, "FR");
     FL.setDirection(DcMotor.Direction.REVERSE);
     BL.setDirection(DcMotor.Direction.REVERSE);
-    FL.setDirection(DcMotor.Direction.FORWARD);
+    FR.setDirection(DcMotor.Direction.FORWARD);
     BR.setDirection(DcMotor.Direction.FORWARD);
     BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -42,19 +44,21 @@ public class TeleOp extends LinearOpMode {
     waitForStart();
     while (opModeIsActive()) {
       oq.readLocalizerData(localizer);
+      if(gamepad1.dpad_down) localizer.heading_rad=0;
       if (localizer.crcOk) {
         // Read and display valid localizer data here
         robotHeadingR = localizer.heading_rad;
         robotMMPosX = localizer.posX_mm;
         robotMMPosY = localizer.posY_mm;
       }
+
       //Stick inputting, evaluating, and setting motor power
       double leftstickinputy = gamepad1.left_stick_y;
       double leftstickinputx = gamepad1.left_stick_x;
       double targetturn = gamepad1.right_stick_x;
       boolean slowmode = gamepad1.left_trigger_pressed;
       boolean fireinthehole = gamepad1.right_trigger_pressed;
-      double[] motorpowerarray = MotorPowerArray(leftstickinputy, -leftstickinputx, targetturn, robotHeadingR);
+      double[] motorpowerarray = MotorPowerArray(leftstickinputx, leftstickinputy, targetturn, robotHeadingR);
       double BRmotorpower = motorpowerarray[0];
       double BLmotorpower = motorpowerarray[1];
       double FRmotorpower = motorpowerarray[2];

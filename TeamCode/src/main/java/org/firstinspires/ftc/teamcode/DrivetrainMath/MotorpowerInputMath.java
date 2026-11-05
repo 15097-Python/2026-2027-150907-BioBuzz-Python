@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.DrivetrainMath;
 
+import static com.sun.tools.doclint.Entity.pi;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -14,14 +15,15 @@ public class MotorpowerInputMath {
      * @param currentrelativeheading the gyro scope's value based off of the initial heading which eventualy sholud be based off of the rotation of the robot from the limelight
      * @return output x, y, and turn motor power values
      */
-    public static double[] MotorPowerArray(double leftstickinputx, double leftstickinputy, double targetturn, double currentrelativeheading) {
-        double targetdrivey = leftstickinputx * cos(currentrelativeheading) - leftstickinputy * sin(currentrelativeheading);
-        double targetdrivex = leftstickinputx * sin(currentrelativeheading) + leftstickinputy * cos(currentrelativeheading);
 
-        double BRmotorpower = targetdrivey + targetdrivex - targetturn;
-        double BLmotorpower = targetdrivey - targetdrivex + targetturn;
-        double FRmotorpower = (targetdrivey - targetdrivex) - targetturn;
-        double FLmotorpower = targetdrivey + targetdrivex + targetturn;
+    public static double[] MotorPowerArray(double leftstickinputx, double leftstickinputy, double targetturn, double currentrelativeheading) {
+        double targetdrivex = leftstickinputx * cos(currentrelativeheading) - leftstickinputy * sin(currentrelativeheading);
+        double targetdrivey = leftstickinputx * sin(currentrelativeheading) + leftstickinputy * cos(currentrelativeheading);
+
+        double BRmotorpower = targetdrivey - targetdrivex - targetturn;
+        double BLmotorpower = targetdrivey + targetdrivex + targetturn;
+        double FRmotorpower = (targetdrivey + targetdrivex) - targetturn;
+        double FLmotorpower = targetdrivey - targetdrivex + targetturn;
 
         return new double[]{BRmotorpower, BLmotorpower, FRmotorpower, FLmotorpower};
 

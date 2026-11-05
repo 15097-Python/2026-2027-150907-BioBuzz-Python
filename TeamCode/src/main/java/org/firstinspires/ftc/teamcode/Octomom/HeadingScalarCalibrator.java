@@ -28,8 +28,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * This OpMode helps calibrate the heading scalar for the IMU on the
  * OctoQuad FTC Edition MK2
  */
-@TeleOp
-public class HeadingScalarCalibrator extends LinearOpMode
+@TeleOp(name="heading")
+public class   HeadingScalarCalibrator extends LinearOpMode
 {
     OctoQuadFWv3 oq;
 
@@ -45,7 +45,7 @@ public class HeadingScalarCalibrator extends LinearOpMode
     {
         telemetry.setMsTransmissionInterval(50);
 
-        oq = hardwareMap.get(OctoQuadFWv3.class, "octoquad");
+        oq = hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
 
         telemetry.addLine("Place the robot on a level surface, against a solid edge. The baseboard of a wall usually works well for this. Press the right bumper to continue.");
         telemetry.update();

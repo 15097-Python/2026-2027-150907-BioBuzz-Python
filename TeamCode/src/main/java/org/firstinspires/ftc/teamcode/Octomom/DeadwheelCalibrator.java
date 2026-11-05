@@ -27,7 +27,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 /*
  * This OpMode helps calibrate the ticks/mm and directions for your deadwheels
  */
-@TeleOp
+@TeleOp(name="deadwheel")
 public class DeadwheelCalibrator extends LinearOpMode
 {
     static final int FEET_TO_PUSH = 8;
@@ -36,7 +36,7 @@ public class DeadwheelCalibrator extends LinearOpMode
     @Override
     public void runOpMode()
     {
-        OctoQuadFWv3 oq = hardwareMap.get(OctoQuadFWv3.class, "octoquad");
+        OctoQuadFWv3 oq = hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
 
         oq.resetEverything();
 
