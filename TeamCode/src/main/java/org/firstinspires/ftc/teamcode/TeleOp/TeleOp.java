@@ -26,7 +26,7 @@ public class TeleOp extends LinearOpMode {
   @Override
   public void runOpMode(){
     //setting motors up
-    OctoQuadFWv3 oq =  hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
+    OctoQuadFWv3 oq =  OctomomInitializations(hardwareMap);
     OctoQuadFWv3.LocalizerDataBlock localizer;
     localizer = new OctoQuadFWv3.LocalizerDataBlock();
     DcMotor BR = hardwareMap.get(DcMotor.class, "BR");
