@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.DrivetrainMath.AccelLimit;
 import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
 
 import org.firstinspires.ftc.teamcode.Octomom.OctoQuadFWv3;
@@ -23,6 +24,10 @@ public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
   short robotMMPosY;
+  public AccelLimit yStick = new AccelLimit();
+  public AccelLimit xStick = new AccelLimit();
+  public AccelLimit turn = new AccelLimit();
+  public static ElapsedTime timer = new ElapsedTime();
   @Override
   public void runOpMode(){
     //setting motors up
@@ -41,10 +46,12 @@ public class TeleOp extends LinearOpMode {
     FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    OctomomInitializations(oq);
     waitForStart();
     while (opModeIsActive()) {
       oq.readLocalizerData(localizer);
-      if(gamepad1.dpad_down) localizer.heading_rad=0;
+      if(gamepad1.dpad_down) oq.resetLocalizerAndCalibrateIMU();
+
       if (localizer.crcOk) {
         // Read and display valid localizer data here
         robotHeadingR = localizer.heading_rad;
@@ -53,23 +60,35 @@ public class TeleOp extends LinearOpMode {
       }
 
       //Stick inputting, evaluating, and setting motor power
-      double leftstickinputy = gamepad1.left_stick_y;
-      double leftstickinputx = gamepad1.left_stick_x;
-      double targetturn = gamepad1.right_stick_x;
+
+      yStick.setTargetVelocity(gamepad1.left_stick_y);
+      xStick.setTargetVelocity(gamepad1.left_stick_x);
+      turn.setTargetVelocity(gamepad1.right_stick_x);
+      yStick.LimitAcceleration();
+      xStick.LimitAcceleration();
+      turn.LimitAcceleration();
+
+
+
       boolean slowmode = gamepad1.left_trigger_pressed;
       boolean fireinthehole = gamepad1.right_trigger_pressed;
-      double[] motorpowerarray = MotorPowerArray(leftstickinputx, leftstickinputy, targetturn, robotHeadingR);
-      double BRmotorpower = motorpowerarray[0];
-      double BLmotorpower = motorpowerarray[1];
-      double FRmotorpower = motorpowerarray[2];
-      double FLmotorpower = motorpowerarray[3];
+      double[] motorpowerarray = MotorPowerArray(-xStick.currentVelocity, yStick.currentVelocity, turn.currentVelocity, robotHeadingR);
+      double BRmotorpower = motorpowerarray[0] ;
+      double BLmotorpower = motorpowerarray[1] ;
+      double FRmotorpower = motorpowerarray[2] ;
+      double FLmotorpower = motorpowerarray[3] ;
       BR.setPower(BRmotorpower);
       BL.setPower(BLmotorpower);
       FR.setPower(FRmotorpower);
       FL.setPower(FLmotorpower);
 
 
-
+      telemetry.addData("BRmotorpower",BRmotorpower);
+      telemetry.addData("BLmotorpower",BLmotorpower);
+      telemetry.addData("FRmotorpower",FRmotorpower);
+      telemetry.addData("FLmotorpower",FLmotorpower);
+      telemetry.addData("robotheading",robotHeadingR);
+      telemetry.update();
 
     }
   }

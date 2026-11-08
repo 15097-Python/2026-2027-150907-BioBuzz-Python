@@ -17,13 +17,14 @@ public class MotorpowerInputMath {
      */
 
     public static double[] MotorPowerArray(double leftstickinputx, double leftstickinputy, double targetturn, double currentrelativeheading) {
-        double targetdrivex = leftstickinputx * cos(currentrelativeheading) - leftstickinputy * sin(currentrelativeheading);
-        double targetdrivey = leftstickinputx * sin(currentrelativeheading) + leftstickinputy * cos(currentrelativeheading);
+        double targetdrivex = leftstickinputx * cos(currentrelativeheading) + leftstickinputy * sin(currentrelativeheading);
+        double targetdrivey = leftstickinputx * sin(currentrelativeheading) - leftstickinputy * cos(currentrelativeheading);
 
         double BRmotorpower = targetdrivey - targetdrivex - targetturn;
         double BLmotorpower = targetdrivey + targetdrivex + targetturn;
         double FRmotorpower = (targetdrivey + targetdrivex) - targetturn;
         double FLmotorpower = targetdrivey - targetdrivex + targetturn;
+
 
         return new double[]{BRmotorpower, BLmotorpower, FRmotorpower, FLmotorpower};
     }

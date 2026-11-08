@@ -44,7 +44,7 @@ public class LocalizerTest extends LinearOpMode
     static final float Y_TICKS_PER_MM = 19.9586F;//20.0164//19.9586//19.8995F
     static final float TCP_OFFSET_X_MM = 160F;
     static final float TCP_OFFSET_Y_MM = -160F;
-    static final float IMU_SCALAR = 1.0086F;//1.0086////1.007//1.0087
+    static final float IMU_SCALAR = 1.0087F;//1.0086////1.007//1.0087
 
     // Conversion factor for radians --> degrees
     static final double RAD2DEG = 180/Math.PI;
