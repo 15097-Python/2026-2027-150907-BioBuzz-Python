@@ -24,6 +24,7 @@ public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
   short robotMMPosY;
+  final double motorMaxVelocity = 0;
   public AccelLimit yStick = new AccelLimit();
   public AccelLimit xStick = new AccelLimit();
   public AccelLimit turn = new AccelLimit();
@@ -34,10 +35,10 @@ public class TeleOp extends LinearOpMode {
     OctoQuadFWv3 oq =  hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
     OctoQuadFWv3.LocalizerDataBlock localizer;
     localizer = new OctoQuadFWv3.LocalizerDataBlock();
-    DcMotor BR = hardwareMap.get(DcMotor.class, "BR");
-    DcMotor BL = hardwareMap.get(DcMotor.class, "BL");
-    DcMotor FL = hardwareMap.get(DcMotor.class, "FL");
-    DcMotor FR = hardwareMap.get(DcMotor.class, "FR");
+    DcMotorEx BR = hardwareMap.get(DcMotorEx.class, "BR");
+    DcMotorEx BL = hardwareMap.get(DcMotorEx.class, "BL");
+    DcMotorEx FL = hardwareMap.get(DcMotorEx.class, "FL");
+    DcMotorEx FR = hardwareMap.get(DcMotorEx.class, "FR");
     FL.setDirection(DcMotor.Direction.REVERSE);
     BL.setDirection(DcMotor.Direction.REVERSE);
     FR.setDirection(DcMotor.Direction.FORWARD);
@@ -77,12 +78,14 @@ public class TeleOp extends LinearOpMode {
       double BLmotorpower = motorpowerarray[1] ;
       double FRmotorpower = motorpowerarray[2] ;
       double FLmotorpower = motorpowerarray[3] ;
-      BR.setPower(BRmotorpower);
-      BL.setPower(BLmotorpower);
-      FR.setPower(FRmotorpower);
-      FL.setPower(FLmotorpower);
+      BR.setVelocity(BRmotorpower*motorMaxVelocity);
+      BL.setVelocity(BLmotorpower*motorMaxVelocity);
+      FR.setVelocity(FRmotorpower*motorMaxVelocity);
+      FL.setVelocity(FLmotorpower*motorMaxVelocity);
 
 
+      telemetry.addData("x",localizer.posX_mm);
+      telemetry.addData("y",localizer.posY_mm);
       telemetry.addData("BRmotorpower",BRmotorpower);
       telemetry.addData("BLmotorpower",BLmotorpower);
       telemetry.addData("FRmotorpower",FRmotorpower);

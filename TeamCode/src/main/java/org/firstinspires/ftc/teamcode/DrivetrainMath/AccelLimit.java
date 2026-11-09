@@ -9,9 +9,9 @@ public class AccelLimit {
         this.targetVelocity = newTargetVelocity;
     }
     public void LimitAcceleration() {
-        if (TeleOp.timer.milliseconds() % 100 <= 10) {
-
-            final double accelerationDelta = .2;
+        if (TeleOp.timer.milliseconds() > 100) {
+            TeleOp.timer.reset();
+            final double accelerationDelta = 5;
             double velocityDelta = targetVelocity - currentVelocity;
             if (Math.abs(velocityDelta) < accelerationDelta) {
                 this.currentVelocity = targetVelocity;
