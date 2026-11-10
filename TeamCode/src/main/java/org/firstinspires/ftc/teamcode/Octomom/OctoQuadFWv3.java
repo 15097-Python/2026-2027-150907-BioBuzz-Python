@@ -41,6 +41,7 @@ import java.util.Locale;
 @SuppressWarnings("unused")
 public class OctoQuadFWv3 extends I2cDeviceSynchDevice<I2cDeviceSynchSimple>
 {
+
     public static final byte OCTOQUAD_CHIP_ID = 0x51;
     public static final int ENCODER_FIRST = 0;
     public static final int ENCODER_LAST = 7;
