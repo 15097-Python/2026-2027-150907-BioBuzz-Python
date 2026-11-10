@@ -1,9 +1,10 @@
-//Crosby//Jack//Crosby
+//Crosby//Jack//Crosby//Jack//Crosby
 package org.firstinspires.ftc.teamcode.TeleOp;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath.MotorPowerArray;
 import static org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.OctomomInitializations;
 
+import com.pedropathing.follower.ManualDrive;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,19 +19,25 @@ import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
 
 import org.firstinspires.ftc.teamcode.Octomom.OctoQuadFWv3;
 import org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.*;
+import com.pedropathing.follower.Follower;
+import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp!!!uwu")
 public class TeleOp extends LinearOpMode {
+  float robotHeadingTargetR;
+  private Follower follower;
   float robotHeadingR;
   short robotMMPosX;
   short robotMMPosY;
-  final double motorMaxVelocity = 99999999;
+  final double motorMaxVelocity = 2400;
   public AccelLimit yStick = new AccelLimit();
   public AccelLimit xStick = new AccelLimit();
   public AccelLimit turn = new AccelLimit();
   public static ElapsedTime timer = new ElapsedTime();
   @Override
   public void runOpMode(){
+    follower = Constants.create(hardwareMap);
+
     //setting motors up
     OctoQuadFWv3 oq =  hardwareMap.get(OctoQuadFWv3.class, "OctoQuadFWv3");
     OctoQuadFWv3.LocalizerDataBlock localizer;
@@ -68,6 +75,11 @@ public class TeleOp extends LinearOpMode {
       yStick.LimitAcceleration();
       xStick.LimitAcceleration();
       turn.LimitAcceleration();
+      if(turn.targetVelocity!=0){
+        robotHeadingTargetR = robotHeadingR;
+      }else {
+        turn.setTargetVelocity((robotHeadingTargetR-robotHeadingR)/20);
+      }
 
 
 
