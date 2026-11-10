@@ -24,7 +24,7 @@ public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
   short robotMMPosY;
-  final double motorMaxVelocity = 0;
+  final double motorMaxVelocity = 99999999;
   public AccelLimit yStick = new AccelLimit();
   public AccelLimit xStick = new AccelLimit();
   public AccelLimit turn = new AccelLimit();
@@ -91,6 +91,10 @@ public class TeleOp extends LinearOpMode {
       telemetry.addData("FRmotorpower",FRmotorpower);
       telemetry.addData("FLmotorpower",FLmotorpower);
       telemetry.addData("robotheading",robotHeadingR);
+      telemetry.addData("BRmotorspeed",BR.getVelocity());
+      telemetry.addData("BLmotorspeed",BL.getVelocity());
+      telemetry.addData("FRmotorspeed",FR.getVelocity());
+      telemetry.addData("FLmotorspeed",FL.getVelocity());
       telemetry.update();
 
     }
