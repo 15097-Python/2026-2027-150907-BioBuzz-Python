@@ -24,7 +24,7 @@ public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
   short robotMMPosY;
-  final double motorMaxVelocity = 99999999;
+  final double motorMaxVelocity = 2400;//2400
   public AccelLimit yStick = new AccelLimit();
   public AccelLimit xStick = new AccelLimit();
   public AccelLimit turn = new AccelLimit();
@@ -73,7 +73,7 @@ public class TeleOp extends LinearOpMode {
 
       boolean slowmode = gamepad1.left_trigger_pressed;
       boolean fireinthehole = gamepad1.right_trigger_pressed;
-      double[] motorpowerarray = MotorPowerArray(-xStick.currentVelocity, yStick.currentVelocity, turn.currentVelocity, robotHeadingR);
+      double[] motorpowerarray = MotorPowerArray(-xStick.targetVelocity, yStick.targetVelocity, turn.targetVelocity , robotHeadingR);
       double BRmotorpower = motorpowerarray[0] ;
       double BLmotorpower = motorpowerarray[1] ;
       double FRmotorpower = motorpowerarray[2] ;
