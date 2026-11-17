@@ -1,6 +1,6 @@
 //Jack
 
-package org.firstinspires.ftc.teamcode.automove;
+package org.firstinspires.ftc.teamcode.NuclearReactor;
 
 public class PathFinder {
     public static String pathFind(double robotX, double robotY, double targetX, double targetY, double midOneX, double midOneY, double midTwoX, double midTwoY){
