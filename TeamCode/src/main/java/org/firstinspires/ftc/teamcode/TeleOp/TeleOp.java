@@ -40,6 +40,7 @@ public class TeleOp extends LinearOpMode {
     DcMotorEx BL = hardwareMap.get(DcMotorEx.class, "BL");
     DcMotorEx FL = hardwareMap.get(DcMotorEx.class, "FL");
     DcMotorEx FR = hardwareMap.get(DcMotorEx.class, "FR");
+    DcMotorEx Luncher = hardwareMap.get(DcMotorEx.class, "Launcher");
     Servo PollenGate = hardwareMap.get(Servo.class, "S1");
     Servo NectorGate = hardwareMap.get(Servo.class, "S2");
     Servo PollenTurret = hardwareMap.get(Servo.class, "S3");
@@ -65,9 +66,9 @@ public class TeleOp extends LinearOpMode {
         robotMMPosY = localizer.posY_mm;
       }
 
-      if(gamepad1.left_bumper)PollenGate.setPosition(0);
+      if(gamepad1.right_bumper)PollenGate.setPosition(0);
       else PollenGate.setPosition(1);
-      if(gamepad1.left_bumper)NectorGate.setPosition(0);
+      if(gamepad1.right_bumper)NectorGate.setPosition(0);
       else NectorGate.setPosition(1);
       //Stick inputting, evaluating, and setting motor power
 

@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Turrets;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.atan2;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
@@ -22,7 +23,7 @@ public class B29Math {
         double time = distance/ballvel;
         double rawangle = atan2(ydelta + robotvy * time,xdelta + robotvx * time);
         double realangle = rawangle - robotangleR;
-        double turretPosition = (realangle / toRadians(180));
+        double turretPosition = abs(realangle / toRadians(180));
         return(turretPosition);
     }
 }
