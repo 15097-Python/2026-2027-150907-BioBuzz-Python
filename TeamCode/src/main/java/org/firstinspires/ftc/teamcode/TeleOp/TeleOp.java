@@ -19,7 +19,7 @@ import org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath;
 import org.firstinspires.ftc.teamcode.Octomom.OctoQuadFWv3;
 import org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.*;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp!!!uwu")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "!TeleOp")
 public class TeleOp extends LinearOpMode {
   float robotHeadingR;
   short robotMMPosX;
@@ -39,6 +39,8 @@ public class TeleOp extends LinearOpMode {
     DcMotorEx BL = hardwareMap.get(DcMotorEx.class, "BL");
     DcMotorEx FL = hardwareMap.get(DcMotorEx.class, "FL");
     DcMotorEx FR = hardwareMap.get(DcMotorEx.class, "FR");
+    Servo PollenGate = hardwareMap.get(Servo.class, "S1");
+    Servo NectorGate = hardwareMap.get(Servo.class, "S2");
     FL.setDirection(DcMotor.Direction.REVERSE);
     BL.setDirection(DcMotor.Direction.REVERSE);
     FR.setDirection(DcMotor.Direction.FORWARD);
@@ -60,6 +62,10 @@ public class TeleOp extends LinearOpMode {
         robotMMPosY = localizer.posY_mm;
       }
 
+      if(gamepad1.left_bumper)PollenGate.setPosition(0);
+      else PollenGate.setPosition(1);
+      if(gamepad1.left_bumper)NectorGate.setPosition(0);
+      else NectorGate.setPosition(1);
       //Stick inputting, evaluating, and setting motor power
 
       yStick.setTargetVelocity(gamepad1.left_stick_y);
