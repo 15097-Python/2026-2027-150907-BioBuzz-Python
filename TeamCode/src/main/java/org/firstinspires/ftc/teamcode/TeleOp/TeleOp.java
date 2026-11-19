@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.TeleOp;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.teamcode.DrivetrainMath.MotorpowerInputMath.MotorPowerArray;
 import static org.firstinspires.ftc.teamcode.Octomom.OctomomInitialization.OctomomInitializations;
+import static org.firstinspires.ftc.teamcode.Turrets.B29Math.AimerMath;
 
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -41,6 +42,8 @@ public class TeleOp extends LinearOpMode {
     DcMotorEx FR = hardwareMap.get(DcMotorEx.class, "FR");
     Servo PollenGate = hardwareMap.get(Servo.class, "S1");
     Servo NectorGate = hardwareMap.get(Servo.class, "S2");
+    Servo PollenTurret = hardwareMap.get(Servo.class, "S3");
+    Servo NectorTurret = hardwareMap.get(Servo.class, "S4");
     FL.setDirection(DcMotor.Direction.REVERSE);
     BL.setDirection(DcMotor.Direction.REVERSE);
     FR.setDirection(DcMotor.Direction.FORWARD);
@@ -74,11 +77,12 @@ public class TeleOp extends LinearOpMode {
       yStick.LimitAcceleration();
       xStick.LimitAcceleration();
       turn.LimitAcceleration();
-
-
-
       boolean slowmode = gamepad1.left_trigger_pressed;
       boolean fireinthehole = gamepad1.right_trigger_pressed;
+
+      double turretangle = AimerMath(localizer);
+      PollenTurret.setPosition(turretangle);
+      NectorTurret.setPosition(turretangle);
       double[] motorpowerarray = MotorPowerArray(-xStick.targetVelocity, yStick.targetVelocity, turn.targetVelocity , robotHeadingR);
       double BRmotorpower = motorpowerarray[0] ;
       double BLmotorpower = motorpowerarray[1] ;
